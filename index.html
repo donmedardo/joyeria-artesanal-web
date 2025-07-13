@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="es" x-data>
+<html lang="es" x-data="{ menuAbierto: false, mostrarModal: false, imagenActual: '' }">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -9,12 +9,26 @@
 </head>
 <body class="bg-gray-100 text-gray-800">
 
-  <!-- Hero -->
+  <!-- Encabezado con menú Alpine -->
   <header class="bg-white shadow">
     <div class="max-w-6xl mx-auto flex items-center justify-between p-6">
       <h1 class="text-2xl font-bold text-gray-900">Joyas Artesanales</h1>
-      <a href="#contacto" class="bg-yellow-500 text-white px-4 py-2 rounded hover:bg-yellow-600">Contáctame</a>
+      <button class="md:hidden" @click="menuAbierto = !menuAbierto">
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+        </svg>
+      </button>
+      <nav class="hidden md:flex space-x-6">
+        <a href="#servicios" class="hover:text-yellow-600">Servicios</a>
+        <a href="#galeria" class="hover:text-yellow-600">Galería</a>
+        <a href="#contacto" class="hover:text-yellow-600">Contacto</a>
+      </nav>
     </div>
+    <nav x-show="menuAbierto" class="md:hidden px-6 pb-4 space-y-2" x-transition>
+      <a href="#servicios" class="block">Servicios</a>
+      <a href="#galeria" class="block">Galería</a>
+      <a href="#contacto" class="block">Contacto</a>
+    </nav>
   </header>
 
   <!-- Presentación -->
@@ -29,7 +43,7 @@
   </section>
 
   <!-- Servicios -->
-  <section class="py-16 bg-white">
+  <section id="servicios" class="py-16 bg-white">
     <div class="max-w-6xl mx-auto px-4">
       <h2 class="text-3xl font-bold text-center mb-12">Servicios</h2>
       <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
@@ -49,14 +63,20 @@
     </div>
   </section>
 
-  <!-- Galería -->
-  <section class="py-16 bg-gray-50">
+  <!-- Galería con modal -->
+  <section id="galeria" class="py-16 bg-gray-50">
     <div class="max-w-6xl mx-auto px-4">
       <h2 class="text-3xl font-bold text-center mb-12">Galería de trabajos</h2>
       <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-        <img src="img/joya1.jpg" class="rounded shadow-md hover:scale-105 transition" alt="Joya 1" />
-        <img src="img/joya2.jpg" class="rounded shadow-md hover:scale-105 transition" alt="Joya 2" />
-        <img src="img/joya1.jpg" class="rounded shadow-md hover:scale-105 transition" alt="Joya 3" />
+        <img src="img/joya1.jpg" @click="mostrarModal = true; imagenActual = 'img/joya1.jpg'" class="rounded shadow-md cursor-pointer hover:scale-105 transition" />
+        <img src="img/joya2.jpg" @click="mostrarModal = true; imagenActual = 'img/joya2.jpg'" class="rounded shadow-md cursor-pointer hover:scale-105 transition" />
+        <img src="img/joya1.jpg" @click="mostrarModal = true; imagenActual = 'img/joya1.jpg'" class="rounded shadow-md cursor-pointer hover:scale-105 transition" />
+      </div>
+      <div x-show="mostrarModal" class="fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center z-50" x-transition>
+        <div @click.away="mostrarModal = false" class="relative max-w-2xl">
+          <img :src="imagenActual" class="rounded shadow-lg" />
+          <button @click="mostrarModal = false" class="absolute top-2 right-2 text-white text-2xl">×</button>
+        </div>
       </div>
     </div>
   </section>
