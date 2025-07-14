@@ -1,98 +1,103 @@
 <!DOCTYPE html>
-<html lang="es" x-data="{ menuAbierto: false, mostrarModal: false, imagenActual: '' }">
+<html lang="es">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Joyas Artesanales | Taller de Don Medardo</title>
-  <script src="https://cdn.tailwindcss.com"></script>
+  <title>Joyas Artesanales | Taller de Oswaldo</title>
+  <link rel="stylesheet" href="css/styles.css" />
   <script src="https://unpkg.com/alpinejs" defer></script>
 </head>
-<body class="bg-gray-100 text-gray-800">
+<body>
 
-  <!-- Encabezado con menú Alpine -->
-  <header class="bg-white shadow">
-    <div class="max-w-6xl mx-auto flex items-center justify-between p-6">
-      <h1 class="text-2xl font-bold text-gray-900">Joyas Artesanales</h1>
-      <button class="md:hidden" @click="menuAbierto = !menuAbierto">
-        <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
-        </svg>
+  <header class="header" x-data="{ menuAbierto: false }">
+    <div class="contenedor header-flex">
+      <img src="img/logoOS.png" alt="Logo Joyas Artesanales" class="logoOSimg" />
+      <h1 class="logo">Joyas Artesanales</h1>
+      <button class="menu-btn" @click="menuAbierto = !menuAbierto">
+        ☰
       </button>
-      <nav class="hidden md:flex space-x-6">
-        <a href="#servicios" class="hover:text-yellow-600">Servicios</a>
-        <a href="#galeria" class="hover:text-yellow-600">Galería</a>
-        <a href="#contacto" class="hover:text-yellow-600">Contacto</a>
+      <nav class="menu">
+        <a href="#servicios">Servicios</a>
+        <a href="#galeria">Galería</a>
+        <a href="#contacto">Contacto</a>
       </nav>
     </div>
-    <nav x-show="menuAbierto" class="md:hidden px-6 pb-4 space-y-2" x-transition>
-      <a href="#servicios" class="block">Servicios</a>
-      <a href="#galeria" class="block">Galería</a>
-      <a href="#contacto" class="block">Contacto</a>
+    <nav class="menu-mobile" x-show="menuAbierto" x-transition>
+      <a href="#servicios">Servicios</a>
+      <a href="#galeria">Galería</a>
+      <a href="#contacto">Contacto</a>
     </nav>
   </header>
 
-  <!-- Presentación -->
-  <section class="bg-gray-50 py-12">
-    <div class="max-w-5xl mx-auto flex flex-col md:flex-row items-center gap-8">
-      <img src="img/artesano.jpg" alt="Artesano Joyero" class="w-full md:w-1/2 rounded shadow-md">
+  <section >
+    <div >
+
       <div>
-        <h2 class="text-3xl font-semibold mb-4">Soy Don Medardo, artesano joyero</h2>
-        <p class="text-lg text-gray-600">Trabajo metales y piedras preciosas con técnicas tradicionales para crear piezas únicas y personalizadas.</p>
+        <h2>Seccion para imagenes</h2>
+
       </div>
     </div>
   </section>
 
-  <!-- Servicios -->
-  <section id="servicios" class="py-16 bg-white">
-    <div class="max-w-6xl mx-auto px-4">
-      <h2 class="text-3xl font-bold text-center mb-12">Servicios</h2>
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-        <div class="bg-gray-100 p-6 rounded shadow hover:shadow-lg transition">
-          <h3 class="text-xl font-semibold mb-2">Anillos personalizados</h3>
+  <section id="servicios" class="seccion">
+    <div class="contenedor">
+      <h2 class="titulo-seccion">Servicios</h2>
+      <div class="servicios-grid">
+        <div class="servicio">
+          <h3>Anillos personalizados</h3>
           <p>Diseñados a mano con metales preciosos y piedras elegidas por ti.</p>
         </div>
-        <div class="bg-gray-100 p-6 rounded shadow hover:shadow-lg transition">
-          <h3 class="text-xl font-semibold mb-2">Restauración de joyas</h3>
+        <div class="servicio">
+          <h3>Restauración de joyas</h3>
           <p>Recupero el brillo y estructura original de piezas antiguas o dañadas.</p>
         </div>
-        <div class="bg-gray-100 p-6 rounded shadow hover:shadow-lg transition">
-          <h3 class="text-xl font-semibold mb-2">Grabados personalizados</h3>
+        <div class="servicio">
+          <h3>Grabados personalizados</h3>
           <p>Inmortaliza un mensaje especial en anillos, collares o pulseras.</p>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- Galería con modal -->
-  <section id="galeria" class="py-16 bg-gray-50">
-    <div class="max-w-6xl mx-auto px-4">
-      <h2 class="text-3xl font-bold text-center mb-12">Galería de trabajos</h2>
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-        <img src="img/joya1.jpg" @click="mostrarModal = true; imagenActual = 'img/joya1.jpg'" class="rounded shadow-md cursor-pointer hover:scale-105 transition" />
-        <img src="img/joya2.jpg" @click="mostrarModal = true; imagenActual = 'img/joya2.jpg'" class="rounded shadow-md cursor-pointer hover:scale-105 transition" />
-        <img src="img/joya1.jpg" @click="mostrarModal = true; imagenActual = 'img/joya1.jpg'" class="rounded shadow-md cursor-pointer hover:scale-105 transition" />
+  <section id="galeria" class="seccion" x-data="{ mostrarModal: false, imagenActual: '' }">
+    <div class="contenedor">
+      <h2 class="titulo-seccion">Galería de trabajos</h2>
+      <div class="galeria-grid">
+        <img src="img/joya1.jpeg" @click="mostrarModal = true; imagenActual = 'img/joya1.jpg'" class="imagen-mini" />
+        <img src="img/joya2.jpg" @click="mostrarModal = true; imagenActual = 'img/joya2.jpg'" class="imagen-mini" />
+        <img src="img/joya1.jpg" @click="mostrarModal = true; imagenActual = 'img/joya1.jpg'" class="imagen-mini" />
       </div>
-      <div x-show="mostrarModal" class="fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center z-50" x-transition>
-        <div @click.away="mostrarModal = false" class="relative max-w-2xl">
-          <img :src="imagenActual" class="rounded shadow-lg" />
-          <button @click="mostrarModal = false" class="absolute top-2 right-2 text-white text-2xl">×</button>
+
+      <div x-show="mostrarModal" class="modal" x-transition>
+        <div @click.away="mostrarModal = false" class="modal-contenido">
+          <img :src="imagenActual" />
+          <button @click="mostrarModal = false" class="modal-cerrar">×</button>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- Contacto -->
-  <section id="contacto" class="bg-white py-16">
-    <div class="max-w-4xl mx-auto px-4 text-center">
-      <h2 class="text-3xl font-bold mb-4">¿Te interesa una pieza única?</h2>
-      <p class="text-lg mb-6">Contáctame por WhatsApp y cuéntame tu idea.</p>
-      <a href="https://wa.me/593987654321" target="_blank" class="inline-block bg-green-600 text-white px-6 py-3 rounded-full hover:bg-green-700">
+  <section class="presentacion">
+    <div class="contenedor presentacion-flex">
+      <img src="img/OswaldoS.png" alt="Artesano Joyero" class="imagen">
+      <div>
+        <h2>Soy Oswaldo Simba, artesano joyero</h2>
+        <p>Trabajo metales y piedras preciosas con técnicas tradicionales para crear piezas únicas y personalizadas.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="contacto" class="seccion">
+    <div class="contenedor texto-centro">
+      <h2>¿Te interesa una pieza única?</h2>
+      <p>Contáctame por WhatsApp y cuéntame tu idea.</p>
+      <a href="https://wa.me/593999830978" target="_blank" class="btn-whatsapp">
         Escribir por WhatsApp
       </a>
     </div>
   </section>
 
-  <footer class="bg-gray-800 text-white text-center p-4">
+  <footer class="footer">
     © 2025 Joyas Artesanales. Todos los derechos reservados.
   </footer>
 
